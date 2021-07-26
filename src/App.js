@@ -96,8 +96,27 @@ class LogInPanel extends React.Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
+
+    handleChange() {
+        let username = document.getElementById("usernameInput").value;
+        let password = document.getElementById("passwordInput").value;
+        let submitButton = document.getElementById("submitButton");
+        let hoverButton = document.getElementById("submitButton:hover");
+        console.log(this.number);
+        if(username.length > 0 && password.length > 8){
+            submitButton.disabled = false;
+            submitButton.style["background-color"] = "rgb(30, 30, 146)";
+            
+        }
+        else{
+            submitButton.disabled = true;
+            submitButton.style["background-color"]  = "gray";
     
+        }
+    }
+
     checkPassword (text) {
         if(text.length < 8)
             return false;
@@ -113,15 +132,21 @@ class LogInPanel extends React.Component {
             <div className = "LogInPanel">
                 <form className = "logInForm" onSubmit={this.handleSubmit}>
                     <h2 className = "logInTitle"> Log In </h2>
+                    <div id = "usernameWrapper">
                     Username:
                     <br/>
-                    <input id = "usernameInput" type="text" name="user" />
+                    <input id = "usernameInput" type="text" name="user" onChange = {this.handleChange}/>
                     <br/>
+                    </div>
+                    <div id = "passwordWrapper">
                     Password:
                     <br/>
-                    <input id = "passwordInput" type="text" name="email" />
+                    <input id = "passwordInput" type="text" name="email" onChange = {this.handleChange}/>
                     <br/>
-                    <input id = "submitButton" type="submit" value="Submit"/>
+                    </div>
+                    <button id = "submitButton" disabled>
+                        Submit
+                    </button>
 
                 </form>
             </div>
