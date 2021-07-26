@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.siteHeader {
+  background-color: rgb(43, 226, 43);
+  color: white;
+  display: block;
+  position: fixed;
+  height: 100px;
+  width: 100vw;
+  top: 0px;
+}
+
