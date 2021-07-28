@@ -1,4 +1,6 @@
 import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 import "./App.css";
 import arrow from './images/blue arrow.png';
 
@@ -97,8 +99,13 @@ class LogInPanel extends React.Component {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handlePassword = this.handlePassword.bind(this);
+        this.state = {showInput : false};
     }
 
+    handlePassword() {
+        this.setState({showInput : !this.state.showInput});
+    }
     handleChange() {
         let username = document.getElementById("usernameInput").value;
         let password = document.getElementById("passwordInput").value;
@@ -107,13 +114,10 @@ class LogInPanel extends React.Component {
         console.log(this.number);
         if(username.length > 0 && password.length > 8){
             submitButton.disabled = false;
-            submitButton.style["background-color"] = "rgb(30, 30, 146)";
             
         }
         else{
             submitButton.disabled = true;
-            submitButton.style["background-color"]  = "gray";
-    
         }
     }
 
@@ -141,7 +145,8 @@ class LogInPanel extends React.Component {
                     <div id = "passwordWrapper">
                     Password:
                     <br/>
-                    <input id = "passwordInput" type="text" name="email" onChange = {this.handleChange}/>
+                    <input id = "passwordInput" type={this.state.showInput? "text":"password"} name="password" onChange = {this.handleChange}/>
+                    <FontAwesomeIcon icon={this.state.showInput? faEye : faEyeSlash} onClick = {this.handlePassword} className = "eyeIcon"/>
                     <br/>
                     </div>
                     <button id = "submitButton" disabled>

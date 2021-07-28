@@ -45,13 +45,37 @@
   justify-content: center; /* align horizontal */
   align-items: center; /* align vertical */
 }
+
 #passwordInput,#usernameInput {
-  width : 350px;
-  height: 20px;
-  background-color: rgb(128, 128, 128);
+  width : 250px;
+  height: 30px;
+  background-color: white;
+  border: 2px solid gray;
+  padding-left: 15px;
+  border-radius: 10px;
 }
 
+#passwordWrapper{
+  width : 300px;
+  margin-top: 20px;
+}
 
+#usernameWrapper{
+  width: 300px;
+}
+
+.eyeIcon {
+  margin-left: 5px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#submitButton[disabled="true"] {
+  background-color: brown;
+}
 
 #submitButton {
   outline: none;
@@ -68,12 +92,16 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+#submitButton:not([disabled]) {  
+  background-color: rgb(30, 30, 146);
+}
 
-#submitButton[disabled]:hover { 
+#submitButton:hover:not([disabled]) { 
   background-color: rgb(19, 19, 99);
 }
+
 #submitButton:focus {
-  background-color: red;
+  background-color: rgb(19, 19, 99);
 }
 
 .inputFields {
@@ -133,7 +161,7 @@
 }
 
 #messageInput {
-  width: 150px;
+  width: 800px;
   margin: auto;
 }
 
