@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash, faAngleRight} from '@fortawesome/free-solid-svg-icons';
 import "./App.css";
 import arrow from './images/blue arrow.png';
 
@@ -13,11 +13,10 @@ class SendBox extends React.Component {
         return (
             <form className = "submitButton" onSubmit = {this.props.handleSubmit}>
                 <div className = "sendBox">
-
-                    <label>
-                        <input id = "messageInput" type="text" name="name" />
-                    </label>
-                    <input id = "submit" type="submit" value="Submit"/>
+                    <input id = "messageInput" type="text" name="name" />
+                    <button  className = "sendButton">
+                        <FontAwesomeIcon icon = {faAngleRight}/>
+                    </button>
                 </div>
             </form>
         )
@@ -26,14 +25,17 @@ class SendBox extends React.Component {
 
 class Message extends React.Component {
     constructor(props) {
-        super(props);
+        super(props);   
     }
 
     render () {
         return (
-            <div className = "MessageBox">
-                <h5 className = "MessageMetaData">{this.props.user} said at {this.props.date}</h5>
-                <p className = "Message">{this.props.message}</p>
+            <div className = {this.props.selfMessage? "selfMessageBox": "otherMessageBox"}>
+                <div className = {this.props.selfMessage? "selfMessage": "otherMessage"}>
+                    <div className = "triangleDecorator"></div>
+                    <h5 className = "MessageMetaData">{this.props.user} said at {this.props.date}</h5>
+                    <p className = "Message">{this.props.message}</p>
+                </div>
             </div>
         )
     }
@@ -56,7 +58,7 @@ class ChatLog extends React.Component {
             <div className = "ChatLogWrapper">
                 <div className = "ChatLog">
                     {this.props.messages.map((el, index) => (
-                        <Message key = {el[0]+el[1]+el[2].getMilliseconds()} user = {el[0]} date = {this.formatDate(el)} message = {el[1]}/>
+                        <Message key = {el[0]+el[1]+el[2].getMilliseconds()} user = {el[0]} date = {this.formatDate(el)} message = {el[1]} selfMessage = {this.props.user === el[0]} />
                     ))}
                 </div>
             </div>
@@ -88,7 +90,7 @@ class ChatBox extends React.Component {
     render () {
         return (
             <div className = "ChatBox">
-                <ChatLog messages = {this.state.messages}/>
+                <ChatLog messages = {this.state.messages} user = {this.props.user}/>
                 <SendBox handleSubmit = {this.handleNewMessage}/>
             </div>
         )

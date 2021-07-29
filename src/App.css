@@ -111,7 +111,8 @@
 
 .ChatBox {
   margin: auto;
-  display: block;
+  display: flex;
+  flex-direction: column;
   text-align: left;
   width: 80%;
   height : 80%;
@@ -119,19 +120,23 @@
 }
 
 .ChatLogWrapper {
+  flex-grow: 1;
   margin: 15px;
   overflow: auto;
   height: 80%;
   border-radius: 25px;
   border: 5px solid rgb(128, 26, 153);
+  background-color: rgba(190, 93, 255, 0.5);
+  margin-bottom: 0px;
 }
 .ChatLog {
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-items: flex-start;
   justify-content: flex-end;
+  gap: 10px;
   min-height: 100%;
-  background-color: rgba(190, 93, 255, 0.5);
+  margin-bottom: 10px;
   overflow: hidden;
 }
 
@@ -149,33 +154,87 @@
 }
 
 
-.MessageBox { 
-  width: 95%;
-  max-height: 500px;
+.selfMessageBox,.otherMessageBox { 
+  display: flex;
+  height: auto;
+  width: 100%;
   min-height: 40px;
-  margin: auto;
-  margin-top: 2px;
-  margin-bottom: 3px;
-  border: 2px solid black;
+  max-height: 500px;
+}
+
+.selfMessageBox {
+  justify-content: flex-end;
+}
+
+.otherMessageBox {
+  justify-content: flex-start;
+}
+
+.selfMessage,.otherMessage {
+  flex-grow: 0;
+  height: auto;
+  min-height: 40px;
+  max-height: 500px;
+  padding: 5px;
+  padding-left: 10px;
+  border-radius: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.selfMessage {
+  background-color: rgb(177, 19, 177);
+}
+
+.otherMessage {
   background-color: darkmagenta;
 }
-
 #messageInput {
-  width: 800px;
+  flex-grow: 1;
   margin: auto;
+  height: 30px;
+  background-color: white;
+  border: 2px solid gray;
+  padding-left: 15px;
+  border-radius: 10px;
 }
 
+.triangleDecorator {
+  width: 0;
+  height: 0;
+  position: relative;
+  top: -5%;
+  left: -17%;
+  border: 10px solid darkmagenta;
+  border-top: 0px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid transparent;
+}
 .submitButton {
-  width: 400px;
-  margin: auto;
-  margin-bottom: 20px;
+  width: auto;
+  margin: 15px;
 }
 
 .sendBox {
-  width: 216px;
-  margin: auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
+.sendButton {
+  border-radius: 100%;
+  border: none;
+  height: 40px;
+  width: 40px;
+  margin-left: 5px;
+  color: pink;
+  background-color: purple;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.sendButton:hover {
+  background-color: rgb(110, 2, 110);
+}
 ::-webkit-scrollbar {
   width: 10px;
 }
