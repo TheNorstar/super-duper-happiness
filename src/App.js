@@ -32,7 +32,6 @@ class Message extends React.Component {
         return (
             <div className = {this.props.selfMessage? "selfMessageBox": "otherMessageBox"}>
                 <div className = {this.props.selfMessage? "selfMessage": "otherMessage"}>
-                    <div className = "triangleDecorator"></div>
                     <h5 className = "MessageMetaData">{this.props.user} said at {this.props.date}</h5>
                     <p className = "Message">{this.props.message}</p>
                 </div>
@@ -139,17 +138,13 @@ class LogInPanel extends React.Component {
                 <form className = "logInForm" onSubmit={this.handleSubmit}>
                     <h2 className = "logInTitle"> Log In </h2>
                     <div id = "usernameWrapper">
-                    Username:
-                    <br/>
-                    <input id = "usernameInput" type="text" name="user" onChange = {this.handleChange}/>
-                    <br/>
+                        Username:
+                        <input id = "usernameInput" type="text" name="user" onChange = {this.handleChange}/>
                     </div>
                     <div id = "passwordWrapper">
-                    Password:
-                    <br/>
-                    <input id = "passwordInput" type={this.state.showInput? "text":"password"} name="password" onChange = {this.handleChange}/>
-                    <FontAwesomeIcon icon={this.state.showInput? faEye : faEyeSlash} onClick = {this.handlePassword} className = "eyeIcon"/>
-                    <br/>
+                        Password:
+                        <input id = "passwordInput" type={this.state.showInput? "text":"password"} name="password" onChange = {this.handleChange}/>
+                        <FontAwesomeIcon icon={this.state.showInput? faEye : faEyeSlash} onClick = {this.handlePassword} className = "eyeIcon"/>
                     </div>
                     <button id = "submitButton" disabled>
                         Submit
