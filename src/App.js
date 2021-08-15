@@ -3,6 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faAngleRight} from '@fortawesome/free-solid-svg-icons';
 import "./App.css";
 import arrow from './images/blue arrow.png';
+import Stefan from "./images/Stefan.jpg";
+import Dani from "./images/Dani.jpg";
+import Alex from "./images/Alex.jpg";
+import Denisa from "./images/Denisa.jpg";
 
 class SendBox extends React.Component {
     constructor(props) {
@@ -48,8 +52,8 @@ class ChatLog extends React.Component {
 
     formatDate(el){
         let dateString = "";
-        dateString += el[2].getHours() + ":";
-        dateString += el[2].getMinutes();
+        dateString += ((el[2].getHours() < 10)? "0"+ el[2].getHours():el[2].getHours()) + ":";
+        dateString += (el[2].getMinutes() < 10)? "0"+ el[2].getMinutes():el[2].getMinutes();
         return dateString;
     }
     render () {
@@ -89,6 +93,10 @@ class ChatBox extends React.Component {
     render () {
         return (
             <div className = "ChatBox">
+                <div className = "userBanner"> 
+                    <img src={this.props.profilePicture} className = "profilePic"/>
+                    <h1>{this.props.activeChat}</h1>
+                </div>
                 <ChatLog messages = {this.state.messages} user = {this.props.user}/>
                 <SendBox handleSubmit = {this.handleNewMessage}/>
             </div>
@@ -156,15 +164,59 @@ class LogInPanel extends React.Component {
     }
 }
 
+class ChatList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+    handleClick(e) {
+        e.preventDefault();
+        console.log(e.target.children[1].innerHTML);
+        this.props.changeChat(e.target.children[1].innerHTML.trim());
+    }
+    render () {
+        return (
+            <div className = "ChatList">
+                {this.props.contacts.map( el => (
+                    <div className = "chatItemWrapper" key = {el}>
+                    <div className = "chatItem" onClick = {this.handleClick} >
+                        <img src = {this.props.profilePictures[el]} className = "profilePic"/>
+                        <h1> {el} </h1>
+                    </div>
+                    <div className = "horizontalRuler">
+                    </div>
+                    </div>
+                ))}
+            </div>
+        )
+    }
+}
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {LoggedIn : false, user : ""}
+        this.state = {
+            LoggedIn : false, 
+            user : "",
+            contacts : ["Stefan", "Alex", "Dani", "Denisa"],
+            profilePictures: {
+                "Stefan" : Stefan, 
+                "Alex" : Alex,
+                "Dani" : Dani, 
+                "Denisa" : Denisa
+            },
+            activeChat : "Denisa"
+        }
         this.handleLogIn = this.handleLogIn.bind(this);
+        this.changeChat = this.changeChat.bind(this);
     }
 
     handleLogIn () {
         this.setState({LoggedIn : !this.state.LoggedIn, user : document.getElementById("usernameInput").value});
+    }
+
+    changeChat (contact) {
+        console.log(contact, typeof contact, contact.length)
+        this.setState({activeChat : contact});
     }
     render () {
         return (
@@ -174,10 +226,13 @@ class App extends React.Component {
                 </div>
                 <div className = "siteContent">
                     {this.state.LoggedIn &&
-                        <ChatBox user = {this.state.user}/>
+                        <div className = "ChatWrapper">
+                            <ChatList contacts = {this.state.contacts} profilePictures = {this.state.profilePictures}  changeChat = {this.changeChat} />
+                            <ChatBox user = {this.state.user} activeChat = {this.state.activeChat} profilePicture = {this.state.profilePictures[this.state.activeChat]} />
+                        </div>
                     }
                     {!this.state.LoggedIn &&
-                        <LogInPanel LoggedIn={this.state.LoggedIn} handleLogIn={this.handleLogIn}/>
+                        <LogInPanel LoggedIn={this.state.LoggedIn} handleLogIn={this.handleLogIn} />
                     }
                 </div>
                 </div>
