@@ -15,7 +15,7 @@ class SendBox extends React.Component {
 
     render () {
         return (
-            <form className = "submitButton" onSubmit = {this.props.handleSubmit}>
+            <form className = "submitButton" onSubmit = {this.props.handleNewMessage}>
                 <div className = "sendBox">
                     <input id = "messageInput" type="text" name="name" />
                     <button  className = "sendButton">
@@ -60,7 +60,7 @@ class ChatLog extends React.Component {
         return (
             <div className = "ChatLogWrapper">
                 <div className = "ChatLog">
-                    {this.props.messages.map((el, index) => (
+                    {this.props.chatHistory.map((el, index) => (
                         <Message key = {el[0]+el[1]+el[2].getMilliseconds()} user = {el[0]} date = {this.formatDate(el)} message = {el[1]} selfMessage = {this.props.user === el[0]} />
                     ))}
                 </div>
@@ -72,10 +72,6 @@ class ChatLog extends React.Component {
 class ChatBox extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            messages : [["Dragos","hai pe overcooked", new Date()],["Andreea", "ok :3", new Date()],["Stefan", "no lol", new Date()]]
-        }
-        this.handleNewMessage = this.handleNewMessage.bind(this);
     }
 
     componentDidUpdate() {
@@ -83,13 +79,7 @@ class ChatBox extends React.Component {
         console.log(chatHistory.scrollHeight);
         chatHistory.scrollTop = chatHistory.scrollHeight;
     }
-    handleNewMessage(e) {
-        e.preventDefault();
-        let updatedMessages = [...this.state.messages];
-        updatedMessages.push([this.props.user, document.getElementById("messageInput").value, new Date()]);
-        this.setState({messages : updatedMessages});
 
-    }
     render () {
         return (
             <div className = "ChatBox">
@@ -97,8 +87,8 @@ class ChatBox extends React.Component {
                     <img src={this.props.profilePicture} className = "profilePic"/>
                     <h1>{this.props.activeChat}</h1>
                 </div>
-                <ChatLog messages = {this.state.messages} user = {this.props.user}/>
-                <SendBox handleSubmit = {this.handleNewMessage}/>
+                <ChatLog chatHistory = {this.props.chatHistory} user = {this.props.user}/>
+                <SendBox handleNewMessage = {this.props.handleNewMessage}/>
             </div>
         )
     }
@@ -198,16 +188,23 @@ class App extends React.Component {
             LoggedIn : false, 
             user : "",
             contacts : ["Stefan", "Alex", "Dani", "Denisa"],
-            profilePictures: {
+            profilePictures : {
                 "Stefan" : Stefan, 
                 "Alex" : Alex,
                 "Dani" : Dani, 
                 "Denisa" : Denisa
             },
+            chatHistory : {
+                "Stefan" : [],
+                "Alex" : [],
+                "Dani" : [], 
+                "Denisa" : []
+            },
             activeChat : "Denisa"
         }
         this.handleLogIn = this.handleLogIn.bind(this);
         this.changeChat = this.changeChat.bind(this);
+        this.handleNewMessage = this.handleNewMessage.bind(this);
     }
 
     handleLogIn () {
@@ -218,6 +215,16 @@ class App extends React.Component {
         console.log(contact, typeof contact, contact.length)
         this.setState({activeChat : contact});
     }
+    handleNewMessage(e) {
+        e.preventDefault();
+        let updatedChatHistory = Object.assign({}, this.state.chatHistory)
+        updatedChatHistory[this.state.activeChat].push([this.state.user, document.getElementById("messageInput").value, new Date()]);
+        console.log(document.getElementById("messageInput").value);
+        document.getElementById("messageInput").value = "";
+        console.log(document.getElementById("messageInput").value);
+        this.setState({chatHistory : updatedChatHistory});
+
+    }
     render () {
         return (
             <div className = "App">
@@ -227,8 +234,18 @@ class App extends React.Component {
                 <div className = "siteContent">
                     {this.state.LoggedIn &&
                         <div className = "ChatWrapper">
-                            <ChatList contacts = {this.state.contacts} profilePictures = {this.state.profilePictures}  changeChat = {this.changeChat} />
-                            <ChatBox user = {this.state.user} activeChat = {this.state.activeChat} profilePicture = {this.state.profilePictures[this.state.activeChat]} />
+                            <ChatList 
+                                    contacts = {this.state.contacts} 
+                                    profilePictures = {this.state.profilePictures}  
+                                    changeChat = {this.changeChat}
+                             />
+                            <ChatBox 
+                                    user = {this.state.user}
+                                    activeChat = {this.state.activeChat} 
+                                    profilePicture = {this.state.profilePictures[this.state.activeChat]} 
+                                    chatHistory = {this.state.chatHistory[this.state.activeChat]}
+                                    handleNewMessage = {this.handleNewMessage}
+                            />
                         </div>
                     }
                     {!this.state.LoggedIn &&

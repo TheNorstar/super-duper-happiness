@@ -131,7 +131,7 @@
   border-radius: 25px;
   border: 5px solid rgb(128, 26, 153);
   background-color: rgba(190, 93, 255, 0.5);
-  padding-bottom: 10px;
+  padding: 10px 0;
 }
 .ChatLog {
   display: flex;
@@ -219,7 +219,6 @@
 
 .userBanner {
   position: sticky;
-  z-index: 2;
   top: 0;
   left: 0;
   width: 100%;
@@ -232,8 +231,10 @@
   box-sizing: border-box;
   background-color: rgb(128, 26, 153);
 }
+
 .chatItemWrapper {
   width: 100%;
+  z-index: -1;
 }
 .chatItemWrapper:hover {
   background-color: rgb(114, 41, 182);
@@ -249,6 +250,7 @@
   border-radius: 50%;
   width: 50px;
   height: 50px;
+  border: 2px solid rgb(161, 84, 212);
 }
 .bigProfilePicture {
   border-radius: 50%;
@@ -313,7 +315,9 @@
   width: 30%;
   height: 80%;
   box-sizing: border-box;
+  overflow: hidden;
 }
+
 .ChatWrapper {
   display: flex;
   align-items: center;
