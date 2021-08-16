@@ -40,6 +40,15 @@
     min-height: 100%;
   }
 
+  .chatItems {
+    height: 60%;
+    width: 100%;
+  }
+  .ChatItemsWrapper {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+  }
   .chatItemWrapper {
     width: 100%;
     z-index: -1;
@@ -60,13 +69,40 @@
     height: 50px;
     border: 2px solid rgb(161, 84, 212);
   }
-  .bigProfilePicture {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
+  .userName {
+      width: 80%;
   }
   .horizontalRuler {
     height: 2px;
     width: 100%;
     background-color: black;
+  }
+
+  .searchWrapper {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 80%;
+      height: 50px;
+      background-color: rgb(128, 26, 153);
+      border-radius: 10px;
+      margin: auto;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      border: 2px solid rgb(161, 84, 212);
+  }
+
+  .searchChat {
+    padding: 10px;
+    box-sizing: border-box;
+    width: 300px;
+    height: 40px;
+    background-color: rgb(128, 26, 153);
+    color: white;
+    outline: none; 
+    border: none;
+  }
+
+  .searchIcon {
+    padding-left: 20px;
   }

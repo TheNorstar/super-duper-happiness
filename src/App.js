@@ -16,7 +16,8 @@ class App extends React.Component {
         this.state = {
             LoggedIn : false, 
             user : "",
-            contacts : ["Stefan", "Alex", "Dani", "Denisa"],
+            contacts : ["Stefan", "Alex", "Dani", "Denisa", "Dorel", "Dragos", "Radu", "Andreea", "Paul", "Dave", "Estebanu Hulio Ricardo Montoia de la Rosa Ramirez", "Robert", "Catalin"],
+            filteredContacts : ["Stefan", "Alex", "Dani", "Denisa", "Dorel", "Dragos", "Radu", "Andreea", "Paul", "Dave", "Estebanu Hulio Ricardo Montoia de la Rosa Ramirez", "Robert", "Catalin"],
             profilePictures : {
                 "Stefan" : Stefan, 
                 "Alex" : Alex,
@@ -34,6 +35,7 @@ class App extends React.Component {
         this.handleLogIn = this.handleLogIn.bind(this);
         this.changeChat = this.changeChat.bind(this);
         this.handleNewMessage = this.handleNewMessage.bind(this);
+        this.filterContacts = this.filterContacts.bind(this);
     }
 
     handleLogIn () {
@@ -44,6 +46,7 @@ class App extends React.Component {
         console.log(contact, typeof contact, contact.length)
         this.setState({activeChat : contact});
     }
+
     handleNewMessage(e) {
         e.preventDefault();
         let updatedChatHistory = Object.assign({}, this.state.chatHistory)
@@ -52,21 +55,32 @@ class App extends React.Component {
         document.getElementById("messageInput").value = "";
         console.log(document.getElementById("messageInput").value);
         this.setState({chatHistory : updatedChatHistory});
-
     }
+
+    filterContacts(e) {
+        e.preventDefault();
+        let filterText = document.getElementsByClassName("searchChat")[0].value.toLowerCase();
+        let newFilteredContacts = [];
+        console.log(filterText.value);
+
+        for(let contact of this.state.contacts) {
+            if(contact.toLowerCase().includes(filterText))
+                newFilteredContacts.push(contact);
+        }
+        this.setState({filteredContacts : newFilteredContacts});
+    }
+
     render () {
         return (
             <div className = "App">
-                <div className = "siteHeader">
-                    <h2>My Website</h2>
-                </div>
                 <div className = "siteContent">
                     {this.state.LoggedIn &&
                         <div className = "ChatWrapper">
                             <ChatList 
-                                    contacts = {this.state.contacts} 
+                                    contacts = {this.state.filteredContacts} 
                                     profilePictures = {this.state.profilePictures}  
                                     changeChat = {this.changeChat}
+                                    filterContacts = {this.filterContacts}
                              />
                             <ChatBox 
                                     user = {this.state.user}

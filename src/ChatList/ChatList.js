@@ -1,5 +1,7 @@
 import React from "react";
 import "./ChatList.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 class ChatList extends React.Component {
     constructor(props) {
@@ -14,16 +16,26 @@ class ChatList extends React.Component {
     render () {
         return (
             <div className = "ChatList">
-                {this.props.contacts.map( el => (
-                    <div className = "chatItemWrapper" key = {el}>
-                    <div className = "chatItem" onClick = {this.handleClick} >
-                        <img src = {this.props.profilePictures[el]} className = "profilePic"/>
-                        <h1> {el} </h1>
+                <label className = "searchWrapper">
+                    <FontAwesomeIcon icon={faSearch} className = "searchIcon" />
+                    <input className = "searchChat" onChange = {this.props.filterContacts}/>
+                </label>
+                <div className = "horizontalRuler">
+                </div>
+                <div className = "ChatItemsWrapper" >
+                    <div className = "ChatItem">
+                    {this.props.contacts.map( el => (
+                        <div className = "chatItemWrapper" key = {el}>
+                            <div className = "chatItem" onClick = {this.handleClick} >
+                                <img src = {this.props.profilePictures[el]} className = "profilePic"/>
+                                <h1 className = "userName"> {el} </h1>
+                            </div>
+                            <div className = "horizontalRuler">
+                            </div>
+                        </div>
+                    ))}
                     </div>
-                    <div className = "horizontalRuler">
-                    </div>
-                    </div>
-                ))}
+                </div>
             </div>
         )
     }
