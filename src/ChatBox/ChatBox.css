@@ -37,10 +37,11 @@
   }
   
   .Message,.MessageMetaData {
+    z-index: 1;
     text-align: left;
     margin: auto;
   }
-  
+
   .Message {
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -55,12 +56,7 @@
     height: auto;
     width: 100%;
   }
-  
-  .otherMessage,.selfMessage {
-    min-height: 40px;
-    max-height: 500px;
-    max-width: 60%;
-  }
+
   .otherMessage::before {
     content: "";
     display: block;
@@ -77,17 +73,18 @@
   }
   
   .selfMessage::before {
+    z-index: 1;
     content: "";
     display: block;
     position:relative;
     width: 0;
     height: 0;
-    border: 8px solid rgb(177, 19, 177);
-    border-bottom: 8px solid transparent;
-    border-right: 8px solid transparent;
+    border: 12px solid rgb(177, 19, 177);
+    border-bottom: 12px solid transparent;
+    border-right: 12px solid transparent;
     position: absolute;
     right: -10px;
-    top: 2px;
+    top: 1px;
   }
   .selfMessageBox {
     justify-content: flex-end;
@@ -98,6 +95,7 @@
   }
   
   .selfMessage,.otherMessage {
+    z-index: 2;
     position: relative;
     flex-grow: 0;
     height: auto;
@@ -105,9 +103,13 @@
     max-height: 500px;
     padding: 5px;
     padding-left: 10px;
+    padding-right: 20px;
     border-radius: 20px;
     margin-left: 10px;
     margin-right: 10px;
+    min-height: 40px;
+    max-height: 500px;
+    max-width: 60%;
   }
   
   .userBanner {
@@ -123,6 +125,7 @@
     padding: 0 30px;
     box-sizing: border-box;
     background-color: rgb(128, 26, 153);
+    user-select: none;
   }
   
   .chatItemWrapper {
@@ -170,9 +173,9 @@
     margin: auto;
     height: 30px;
     max-height: 300px;
-    color: black;
-    background-color: white;
-    border: 2px solid gray;
+    color: white;
+    background-color: rgb(128, 26, 153);
+    border: 2px solid rgb(161, 84, 212);
     padding-left: 15px;
     border-radius: 10px;
   }
@@ -203,4 +206,27 @@
   .sendButton:hover {
     background-color: rgb(110, 2, 110);
   }
+
+  .optionsIcon {
+    margin-left: auto;
+    margin-right: 5px;
+    color: white;
+    font-size: 20px;
+  }
   
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: purple;
+    border-radius: 10px;
+  }

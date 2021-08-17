@@ -10,8 +10,12 @@ class ChatList extends React.Component {
     }
     handleClick(e) {
         e.preventDefault();
-        console.log(e.target.children[1].innerHTML);
-        this.props.changeChat(e.target.children[1].innerHTML.trim());
+        let target = e.target;
+        if(target.className == "chatItem")
+            this.props.changeChat(target.children[1].innerHTML.trim());
+        else if(target.parentElement.className == "chatItem") {
+            this.props.changeChat(target.parentElement.children[1].innerHTML.trim());
+        }
     }
     render () {
         return (
@@ -23,12 +27,12 @@ class ChatList extends React.Component {
                 <div className = "horizontalRuler">
                 </div>
                 <div className = "ChatItemsWrapper" >
-                    <div className = "ChatItem">
+                    <div className = "ChatItems">
                     {this.props.contacts.map( el => (
                         <div className = "chatItemWrapper" key = {el}>
                             <div className = "chatItem" onClick = {this.handleClick} >
                                 <img src = {this.props.profilePictures[el]} className = "profilePic"/>
-                                <h1 className = "userName"> {el} </h1>
+                                <h2 className = "userName"> {el} </h2>
                             </div>
                             <div className = "horizontalRuler">
                             </div>

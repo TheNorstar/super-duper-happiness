@@ -1,7 +1,7 @@
 import React from "react";
 import "./ChatBox.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash, faAngleRight} from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faEllipsisV} from '@fortawesome/free-solid-svg-icons';
 
 class SendBox extends React.Component {
     constructor(props) {
@@ -10,7 +10,7 @@ class SendBox extends React.Component {
 
     render () {
         return (
-            <form className = "submitButton" onSubmit = {this.props.handleNewMessage}>
+            <form className = "submitButton" onSubmit = {this.props.handleNewMessage} autocomplete = "off">
                 <div className = "sendBox">
                     <input id = "messageInput" type="text" name="name" />
                     <button  className = "sendButton">
@@ -47,6 +47,7 @@ class ChatLog extends React.Component {
 
     formatDate(el){
         let dateString = "";
+        console.log(el[2]);
         dateString += ((el[2].getHours() < 10)? "0"+ el[2].getHours():el[2].getHours()) + ":";
         dateString += (el[2].getMinutes() < 10)? "0"+ el[2].getMinutes():el[2].getMinutes();
         return dateString;
@@ -81,6 +82,7 @@ class ChatBox extends React.Component {
                 <div className = "userBanner"> 
                     <img src={this.props.profilePicture} className = "profilePic"/>
                     <h1>{this.props.activeChat}</h1>
+                    <FontAwesomeIcon icon = {faEllipsisV} className = "optionsIcon" />
                 </div>
                 <ChatLog chatHistory = {this.props.chatHistory} user = {this.props.user}/>
                 <SendBox handleNewMessage = {this.props.handleNewMessage}/>

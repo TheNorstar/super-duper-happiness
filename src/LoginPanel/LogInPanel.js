@@ -1,7 +1,7 @@
 import React from "react";
 import "./LogInPanel.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash, faAngleRight} from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 
 class LogInPanel extends React.Component {
     constructor(props) {
@@ -43,16 +43,20 @@ class LogInPanel extends React.Component {
     render () {
         return (
             <div className = "LogInPanel">
-                <form className = "logInForm" onSubmit={this.handleSubmit}>
+                <form className = "logInForm" onSubmit={this.handleSubmit} autocomplete = "off">
                     <h2 className = "logInTitle"> Log In </h2>
                     <div id = "usernameWrapper">
-                        Username:
+                        <p className = "formSectionTitle"> Username: </p>
                         <input id = "usernameInput" type="text" name="user" onChange = {this.handleChange}/>
                     </div>
                     <div id = "passwordWrapper">
-                        Password:
+                        <p className = "formSectionTitle"> Password: </p>
+                        <div className = "passwordInputWrapper">
                         <input id = "passwordInput" type={this.state.showInput? "text":"password"} name="password" onChange = {this.handleChange}/>
-                        <FontAwesomeIcon icon={this.state.showInput? faEye : faEyeSlash} onClick = {this.handlePassword} className = "eyeIcon"/>
+                        <div className = "eyeIconWrapper">
+                            <FontAwesomeIcon icon={this.state.showInput? faEye : faEyeSlash} onClick = {this.handlePassword} className = "eyeIcon"/>
+                        </div>
+                        </div>
                     </div>
                     <button id = "submitButton" disabled>
                         Submit

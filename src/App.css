@@ -32,24 +32,16 @@
   height: 100%;
 }
 
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey; 
-  border-radius: 10px;
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: rgb(248, 26, 248); 
-  border-radius: 10px;
-}
-
 /* Handle on hover */
 
 html {
-  background-image: linear-gradient(to left,purple,darkblue);
+  background-image: linear-gradient(to top,purple,darkblue);
 }
+
+img {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  }
