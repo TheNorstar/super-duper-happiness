@@ -45,6 +45,7 @@
   .Message {
     overflow-wrap: break-word;
     word-wrap: break-word;
+    word-break: break-all;
     display: flex;
     align-content: center;
     height: 80%;

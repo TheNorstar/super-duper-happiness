@@ -72,11 +72,12 @@ class App extends React.Component {
     handleNewMessage(e) {
         e.preventDefault();
         let updatedChatHistory = Object.assign({}, this.state.chatHistory)
-        updatedChatHistory[this.state.activeChat].push([this.state.user, document.getElementById("messageInput").value, new Date()]);
-        console.log(document.getElementById("messageInput").value);
-        document.getElementById("messageInput").value = "";
-        console.log(document.getElementById("messageInput").value);
-        this.setState({chatHistory : updatedChatHistory});
+        let message = document.getElementById("messageInput").value;
+        if(message.trim().length > 0) {
+            updatedChatHistory[this.state.activeChat].push([this.state.user, message, new Date()]);
+            document.getElementById("messageInput").value = "";
+            this.setState({chatHistory : updatedChatHistory});
+        }
     }
 
     filterContacts(e) {
