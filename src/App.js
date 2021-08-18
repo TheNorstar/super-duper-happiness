@@ -39,7 +39,8 @@ class App extends React.Component {
                 "Robert" : Robert
             },
             chatHistory : {
-                "Stefan" : [["Stefan", "Hey ce faci", new Date()]],
+                "Stefan" : [["Stefan", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris interdum lacinia est, eu pharetra enim. Sed pellentesque tempus nibh, in iaculis tortor suscipit at. Donec interdum ligula vitae dolor egestas hendrerit. Vivamus porta fringilla lacus. Etiam ac neque vel massa posuere tempor. Nunc at mauris vel nulla bibendum tristique non."
+                , new Date()], ["Lucian", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut tempus justo non diam feugiat, vel bibendum odio feugiat. Curabitur ultrices urna in gravida convallis. Etiam.", new Date()]],
                 "Alex" : [],
                 "Dani" : [], 
                 "Denisa" : [],
