@@ -12,7 +12,6 @@ const LogInPanel = props => {
         const username = document.querySelector(formName + ".usernameInput").value;
         const password = document.querySelector(formName + ".passwordInput").value;
         const submitButton = document.querySelector(formName + ".submitButton");
-        const hoverButton = document.querySelector(formName + ".submitButton:hover");
         if(username.length > 0 && password.length > 8){
             submitButton.disabled = false;
         }
@@ -21,11 +20,6 @@ const LogInPanel = props => {
         }
     }
 
-    function checkPassword (text) {
-        if(text.length < 8)
-            return false;
-        return true;
-    }
     function handleSubmit (e) {
         e.preventDefault();
         props.handleLogIn();
@@ -33,7 +27,7 @@ const LogInPanel = props => {
     
     return (
         <div className = "LogInPanel">
-            <form className = "logInForm" onSubmit={handleSubmit} autocomplete = "off">
+            <form className = "logInForm" onSubmit={handleSubmit} autoComplete = "off">
                 <h2 className = "logInTitle"> Log In </h2>
                 <div className = "usernameWrapper">
                     <p className = "formSectionTitle"> Username: </p>
@@ -54,7 +48,7 @@ const LogInPanel = props => {
 
             </form>
 
-            <form className = "signUpForm" onSubmit={props.handleSignUp} autocomplete = "off">
+            <form className = "signUpForm" onSubmit={props.handleSignUp} autoComplete = "off">
                 <h2 className = "signUpTitle"> Sign up </h2>
                 <div className = "usernameWrapper">
                     <p className = "formSectionTitle"> Username: </p>

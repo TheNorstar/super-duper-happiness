@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
+import React, { useEffect, useState } from "react"; 
 import ChatList from './ChatList/ChatList';
 import ChatBox from './ChatBox/ChatBox';
 import LogInPanel from "./LoginPanel/LogInPanel";
@@ -19,14 +17,10 @@ const App = props => {
 
     useEffect(() => {
         if(user != "") {
-            getMessages()
-            getUsers()
+            getMessages();
+            getUsers();
         }
     }, [user])
-
-    useEffect(() => {
-
-    }, [messages])
 
     useEffect(() => {
         if(contacts.includes(user)) {

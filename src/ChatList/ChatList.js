@@ -28,7 +28,7 @@ const ChatList = props => {
                 {props.contacts.map( el => (
                     <div className = "chatItemWrapper" key = {el}>
                         <div className = "chatItem" onClick = {handleClick} >
-                            <img src = {props.profilePictures[el]} className = "profilePic"/>
+                            <img src = {props.profilePictures[el]} alt='profile pic' className = "profilePic"/>
                             <h2 className = "userName"> {el} </h2>
                         </div>
                         <div className = "horizontalRuler">

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import "./ChatBox.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faEllipsisV, faTrash} from '@fortawesome/free-solid-svg-icons';
@@ -72,7 +72,7 @@ const ChatBox = props => {
     return (
         <div className = "ChatBox">
             <div className = "userBanner"> 
-                <img src={props.profilePicture} className = "profilePic"/>
+                <img src={props.profilePicture} alt='profile pic' className = "profilePic"/>
                 <h1>{props.activeChat}</h1>
                 <FontAwesomeIcon icon = {faEllipsisV} className = "optionsIcon"/>
             </div>
