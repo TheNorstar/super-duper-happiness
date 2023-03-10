@@ -1,71 +1,82 @@
 import React from "react";
+import {useState} from 'react';
 import "./LogInPanel.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons';
 
-class LogInPanel extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.handlePassword = this.handlePassword.bind(this);
-        this.state = {showInput : false};
-    }
+const LogInPanel = props => {
+    const [showPassword1, setShow1] = useState(false);
+    const [showPassword2, setShow2] = useState(false);
 
-    handlePassword() {
-        this.setState({showInput : !this.state.showInput});
-    }
-    handleChange() {
-        let username = document.getElementById("usernameInput").value;
-        let password = document.getElementById("passwordInput").value;
-        let submitButton = document.getElementById("submitButton");
-        let hoverButton = document.getElementById("submitButton:hover");
-        console.log(this.number);
+    function handleChange(formName) {
+        const username = document.querySelector(formName + ".usernameInput").value;
+        const password = document.querySelector(formName + ".passwordInput").value;
+        const submitButton = document.querySelector(formName + ".submitButton");
+        const hoverButton = document.querySelector(formName + ".submitButton:hover");
         if(username.length > 0 && password.length > 8){
             submitButton.disabled = false;
-            
         }
         else{
             submitButton.disabled = true;
         }
     }
 
-    checkPassword (text) {
+    function checkPassword (text) {
         if(text.length < 8)
             return false;
         return true;
     }
-    handleSubmit (e) {
+    function handleSubmit (e) {
         e.preventDefault();
-        if(true)
-            this.props.handleLogIn();
+        props.handleLogIn();
     }
-    render () {
-        return (
-            <div className = "LogInPanel">
-                <form className = "logInForm" onSubmit={this.handleSubmit} autocomplete = "off">
-                    <h2 className = "logInTitle"> Log In </h2>
-                    <div id = "usernameWrapper">
-                        <p className = "formSectionTitle"> Username: </p>
-                        <input id = "usernameInput" type="text" name="user" onChange = {this.handleChange}/>
+    
+    return (
+        <div className = "LogInPanel">
+            <form className = "logInForm" onSubmit={handleSubmit} autocomplete = "off">
+                <h2 className = "logInTitle"> Log In </h2>
+                <div className = "usernameWrapper">
+                    <p className = "formSectionTitle"> Username: </p>
+                    <input className = "usernameInput" type="text" name="user" onChange = {() => handleChange(".logInForm ")}/>
+                </div>
+                <div className = "passwordWrapper">
+                    <p className = "formSectionTitle"> Password: </p>
+                    <div className = "passwordInputWrapper">
+                    <input className = "passwordInput" type={showPassword1? "text":"password"} name="password" onChange = {() => handleChange(".logInForm ")}/>
+                    <div className = "eyeIconWrapper">
+                        <FontAwesomeIcon icon={showPassword1? faEye : faEyeSlash} onClick = {() => setShow1(!showPassword1)} className = "eyeIcon"/>
                     </div>
-                    <div id = "passwordWrapper">
-                        <p className = "formSectionTitle"> Password: </p>
-                        <div className = "passwordInputWrapper">
-                        <input id = "passwordInput" type={this.state.showInput? "text":"password"} name="password" onChange = {this.handleChange}/>
-                        <div className = "eyeIconWrapper">
-                            <FontAwesomeIcon icon={this.state.showInput? faEye : faEyeSlash} onClick = {this.handlePassword} className = "eyeIcon"/>
-                        </div>
-                        </div>
                     </div>
-                    <button id = "submitButton" disabled>
-                        Submit
-                    </button>
+                </div>
+                <button className = "submitButton" disabled>
+                    Submit
+                </button>
 
-                </form>
-            </div>
+            </form>
+
+            <form className = "signUpForm" onSubmit={props.handleSignUp} autocomplete = "off">
+                <h2 className = "signUpTitle"> Sign up </h2>
+                <div className = "usernameWrapper">
+                    <p className = "formSectionTitle"> Username: </p>
+                    <input className="usernameInput" type="text" name="user" onChange = {() => handleChange(".signUpForm ")}/>
+                </div>
+                <div className = "passwordWrapper">
+                    <p className = "formSectionTitle"> Password: </p>
+                    <div className = "passwordInputWrapper">
+                    <input className = "passwordInput" type={showPassword2? "text":"password"} name="password" onChange = {() => handleChange(".signUpForm ")}/>
+                    <div className = "eyeIconWrapper">
+                        <FontAwesomeIcon icon={showPassword2? faEye : faEyeSlash} onClick = {() => setShow2(!showPassword2)} className = "eyeIcon"/>
+                    </div>
+                    </div>
+                </div>
+                <button className = "submitButton" disabled>
+                    Submit
+                </button>
+
+            </form>
+        </div>
         );
     }
-}
+
 
 export default LogInPanel;
